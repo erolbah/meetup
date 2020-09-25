@@ -1,60 +1,53 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+    <v-navigation-drawer fixed v-model="sideNav">
+      <v-list disabled>
+        <v-subheader>MENU</v-subheader>
+        <v-list-item-group color="primary">
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-account-multiple</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>View Meetups</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
+    <v-card>
+      <v-toolbar>
+        <v-app-bar-nav-icon
+          class="hidden-sm-and-up"
+          @click="sideNav = !sideNav"></v-app-bar-nav-icon>
+        <v-toolbar-title>Meetup</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-toolbar-items class="hidden-xs-only">
+          <v-btn text>
+            <v-icon left>mdi-account-multiple</v-icon> View Meetups
+          </v-btn>
+        </v-toolbar-items>
+      </v-toolbar>
+    </v-card>
+    <main>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <HelloWorld/>
-    </v-main>
+    </main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
+    
   },
 
-  data: () => ({
-    //
-  }),
+  data () {
+    return {
+      sideNav: false
+    }
+  },
 };
 </script>
