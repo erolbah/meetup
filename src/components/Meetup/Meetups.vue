@@ -14,16 +14,16 @@
                   v-text="item.title"
                 ></v-card-title>
                 <v-card-subtitle v-text="item.artist"></v-card-subtitle>
-                <v-card-action>
+                <v-card-actions>
                   <v-btn
                     class="ml-2 mt-3"
-                    fab
+                    
                     icon
-                    height="40px"
-                    right
-                    width="40px"><v-icon>mdi-play</v-icon>
+                    
+                    ><v-icon>mdi-play</v-icon>
+                    View Meetup
                   </v-btn>
-                </v-card-action>
+                </v-card-actions>
               </div>
 
               <v-avatar
