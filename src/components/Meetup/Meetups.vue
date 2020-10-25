@@ -15,13 +15,16 @@
                 ></v-card-title>
                 <v-card-subtitle v-text="item.artist"></v-card-subtitle>
                 <v-card-actions>
-                  <v-btn
+                  <!-- <v-btn
                     class="ml-2 mt-3"
                     
                     icon
                     
                     ><v-icon>mdi-play</v-icon>
                     View Meetup
+                  </v-btn> -->
+                  <v-btn :to="{name: 'Meetup', params: {id: item.id}}" link text>
+                    <v-icon left>mdi-account-multiple</v-icon> View Meetup
                   </v-btn>
                 </v-card-actions>
               </div>
@@ -45,12 +48,14 @@ data: function() {
 return {
     items: [
         {
+          id: 1,
           color: '#1F7087',
           src: 'https://cdn.vuetifyjs.com/images/cards/foster.jpg',
           title: 'Supermodel',
           artist: 'Foster the People',
         },
         {
+          id: 2,
           color: '#952175',
           src: 'https://cdn.vuetifyjs.com/images/cards/halcyon.png',
           title: 'Halcyon Days',
