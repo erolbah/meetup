@@ -15,14 +15,6 @@
                 ></v-card-title>
                 <v-card-subtitle v-text="item.artist"></v-card-subtitle>
                 <v-card-actions>
-                  <!-- <v-btn
-                    class="ml-2 mt-3"
-                    
-                    icon
-                    
-                    ><v-icon>mdi-play</v-icon>
-                    View Meetup
-                  </v-btn> -->
                   <v-btn :to="{name: 'Meetup', params: {id: item.id}}" link text>
                     <v-icon left>mdi-account-multiple</v-icon> View Meetup
                   </v-btn>
