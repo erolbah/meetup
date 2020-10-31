@@ -4,13 +4,17 @@
         <v-col xs-12>
             <v-card>
                 <v-card-title>
-                    <h6>My Meetup</h6>
+                    <h6 class="primary--text">My Meetup</h6>
                 </v-card-title>
                 <v-img :src="src" height="400"></v-img>
                 <v-card-text>
                   <div class="info--text">Dinsdag 30 december 2020 - Adres</div>
                   <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum itaque quia cum, ea ipsum ducimus quisquam neque quas! Quidem sequi dolores maiores? Ipsam facere cupiditate corporis ipsum cumque. Consequuntur, ab.</div>
                 </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn class="primary" >Register</v-btn>
+                </v-card-actions>
           </v-card>
         </v-col>
       </v-row>

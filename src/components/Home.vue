@@ -13,7 +13,8 @@
         cycle
         height="400"
         hide-delimiter-background
-        show-arrows-on-hover>
+        show-arrows-on-hover
+        style="cursor: pointer">
         <v-carousel-item
           v-for="(slide, i) in slides"
           :key="i">
@@ -23,8 +24,9 @@
             <v-row
               class="fill-height"
               align="center"
-              justify="center">
-              <div class="display-3">{{ slide }} Slide</div>
+              justify="center"
+              @click="onLoadMeetup(slide.id)">
+              <div class="display-3">{{ slide.name }} Slide</div>
             </v-row>
           </v-sheet>
         </v-carousel-item>
@@ -44,19 +46,18 @@ data () {
 return {
   colors: [
         'indigo',
-        'warning',
-        'pink darken-2',
-        'red lighten-1',
-        'deep-purple accent-4',
+        'warning'
       ],
       slides: [
-        'First',
-        'Second',
-        'Third',
-        'Fourth',
-        'Fifth',
+        {id: 1, name: 'First'},
+        {id: 2, name: 'Second'}
       ],
     } 
+  },
+  methods: {
+    onLoadMeetup(id) {
+      this.$router.push('/meetups/' + id)
+    }
   }
 }
 </script>

@@ -1,9 +1,7 @@
 <template>
   <v-container>
     <v-row xs12>
-      <v-col xs5 v-for="(item, i) in items"
-          :key="i"
-          >
+      <v-col xs5 v-for="(item, i) in items" :key="i">
         <v-card
             :color="item.color"
             dark>
