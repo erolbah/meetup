@@ -4,11 +4,11 @@
         <v-col xs-12>
             <v-card>
                 <v-card-title>
-                    <h6 class="primary--text">My Meetup</h6>
+                    <h6 class="primary--text">{{meetup.title}}</h6>
                 </v-card-title>
-                <v-img :src="src" height="400"></v-img>
+                <v-img :src="meetup.src" height="400"></v-img>
                 <v-card-text>
-                  <div class="info--text">Dinsdag 30 december 2020 - Adres</div>
+                  <div class="info--text">{{meetup.date}} - Adres</div>
                   <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum itaque quia cum, ea ipsum ducimus quisquam neque quas! Quidem sequi dolores maiores? Ipsam facere cupiditate corporis ipsum cumque. Consequuntur, ab.</div>
                 </v-card-text>
                 <v-card-actions>
@@ -23,15 +23,23 @@
 
 <script>
 export default {
-data: function() {
-return {
-          id: 1,
-          color: '#1F7087',
-          src: 'https://cdn.vuetifyjs.com/images/cards/foster.jpg',
-          title: 'Supermodel',
-          artist: 'Foster the People',
+  props: {
+    id: Number
+},
+  computed: {
+    meetup () {
+      return this.$store.getters.loadedMeetup(this.id)
+    }
+  },
+  data: function() {
+    return {
+      // id: 1,
+      // color: '#1F7087',
+      // src: 'https://cdn.vuetifyjs.com/images/cards/foster.jpg',
+      // title: 'Supermodel',
+      // artist: 'Foster the People',
+    }
   }
-}
 }
 </script>
 

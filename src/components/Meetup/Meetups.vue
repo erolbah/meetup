@@ -1,19 +1,20 @@
 <template>
   <v-container>
     <v-row xs12>
-      <v-col xs5 v-for="(item, i) in items" :key="i">
+      <v-col xs5 v-for="(meetup, i) in meetups" :key="i">
         <v-card
-            :color="item.color"
+            :color="meetup.color"
             dark>
             <div class="d-flex flex-no-wrap justify-space-between">
               <div>
                 <v-card-title
                   class="headline"
-                  v-text="item.title"
+                  v-text="meetup.title"
                 ></v-card-title>
-                <v-card-subtitle v-text="item.artist"></v-card-subtitle>
+                <v-card-subtitle v-text="meetup.artist"></v-card-subtitle>
+                <v-card-text v-text="meetup.date"></v-card-text>
                 <v-card-actions>
-                  <v-btn :to="{name: 'Meetup', params: {id: item.id}}" link text>
+                  <v-btn :to="{name: 'Meetup', params: {id: meetup.id}}" link text>
                     <v-icon left>mdi-account-multiple</v-icon> View Meetup
                   </v-btn>
                 </v-card-actions>
@@ -23,7 +24,7 @@
                 class="ma-3"
                 size="125"
                 tile>
-                <v-img :src="item.src"></v-img>
+                <v-img :src="meetup.src"></v-img>
               </v-avatar>
             </div>
           </v-card>
@@ -34,26 +35,15 @@
 
 <script>
 export default {
-data: function() {
-return {
-    items: [
-        {
-          id: 1,
-          color: '#1F7087',
-          src: 'https://cdn.vuetifyjs.com/images/cards/foster.jpg',
-          title: 'Supermodel',
-          artist: 'Foster the People',
-        },
-        {
-          id: 2,
-          color: '#952175',
-          src: 'https://cdn.vuetifyjs.com/images/cards/halcyon.png',
-          title: 'Halcyon Days',
-          artist: 'Ellie Goulding',
-        },
-      ],
+  computed: {
+    meetups () {
+      return this.$store.getters.loadedMeetups
+    }
+  },
+  data: function() {
+    return {
+    }
   }
-}
 }
 </script>
 

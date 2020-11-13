@@ -42,15 +42,16 @@
 
 <script>
 export default {
-data () {
-return {
-  colors: [
+  computed: {
+    slides () {
+      return this.$store.getters.featuredMeetups
+    }
+  },
+  data () {
+    return {
+      colors: [
         'indigo',
         'warning'
-      ],
-      slides: [
-        {id: 1, name: 'First'},
-        {id: 2, name: 'Second'}
       ],
     } 
   },
