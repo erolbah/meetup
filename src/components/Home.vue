@@ -17,18 +17,18 @@
         style="cursor: pointer">
         <v-carousel-item
           v-for="(slide, i) in slides"
+          :src="slide.src"
+          
           :key="i">
-          <v-sheet
-            :color="colors[i]"
-            height="100%">
+
             <v-row
               class="fill-height"
               align="center"
               justify="center"
               @click="onLoadMeetup(slide.id)">
-              <div class="display-3">{{ slide.name }} Slide</div>
+              <div class="display-3">{{ slide.artist }}</div>
             </v-row>
-          </v-sheet>
+
         </v-carousel-item>
       </v-carousel>
     </v-row>

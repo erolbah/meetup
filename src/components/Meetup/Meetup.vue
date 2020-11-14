@@ -24,7 +24,7 @@
 <script>
 export default {
   props: {
-    id: Number
+    id: String
 },
   computed: {
     meetup () {
@@ -33,11 +33,7 @@ export default {
   },
   data: function() {
     return {
-      // id: 1,
-      // color: '#1F7087',
-      // src: 'https://cdn.vuetifyjs.com/images/cards/foster.jpg',
-      // title: 'Supermodel',
-      // artist: 'Foster the People',
+
     }
   }
 }
