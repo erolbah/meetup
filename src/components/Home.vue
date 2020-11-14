@@ -17,10 +17,8 @@
         style="cursor: pointer">
         <v-carousel-item
           v-for="(slide, i) in slides"
-          :src="slide.src"
-          
+          :src="slide.imageUrl"
           :key="i">
-
             <v-row
               class="fill-height"
               align="center"
@@ -28,7 +26,6 @@
               @click="onLoadMeetup(slide.id)">
               <div class="display-3">{{ slide.artist }}</div>
             </v-row>
-
         </v-carousel-item>
       </v-carousel>
     </v-row>

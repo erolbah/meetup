@@ -10,7 +10,7 @@ export default new Vuex.Store({
         id: 1,
         date: '2020-11-14',
         color: '#1F7087',
-        src: 'https://cdn.vuetifyjs.com/images/cards/foster.jpg',
+        imageUrl: 'https://cdn.vuetifyjs.com/images/cards/foster.jpg',
         title: 'Supermodel',
         artist: 'Foster the People',
       },
@@ -18,7 +18,7 @@ export default new Vuex.Store({
         id: 2,
         date: '2020-11-15',
         color: '#952175',
-        src: 'https://cdn.vuetifyjs.com/images/cards/halcyon.png',
+        imageUrl: 'https://cdn.vuetifyjs.com/images/cards/halcyon.png',
         title: 'Halcyon Days',
         artist: 'Ellie Goulding',
       }
@@ -46,8 +46,23 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    createMeetup ({commit}, payload) {
+      const meetup = {
+        title: payload.title,
+        location: payload.location,
+        imageUrl: payload.imageUrl,
+        description: payload.description,
+        date: payload.date,
+        id: 'asdsadasd'
+      }
+      // reachout to firebase and store it
+      commit('createMeetup', meetup)
+    }
   },
   mutations: {
+    createMeetup (state, payload) {
+      state.loadedMeetups.push(payload)
+    }
   },
   
   modules: {

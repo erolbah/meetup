@@ -6,7 +6,7 @@
                 <v-card-title>
                     <h6 class="primary--text">{{meetup.title}}</h6>
                 </v-card-title>
-                <v-img :src="meetup.src" height="400"></v-img>
+                <v-img :src="meetup.imageUrl" height="400"></v-img>
                 <v-card-text>
                   <div class="info--text">{{meetup.date}} - Adres</div>
                   <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum itaque quia cum, ea ipsum ducimus quisquam neque quas! Quidem sequi dolores maiores? Ipsam facere cupiditate corporis ipsum cumque. Consequuntur, ab.</div>

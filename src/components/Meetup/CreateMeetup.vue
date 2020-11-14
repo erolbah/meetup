@@ -1,45 +1,70 @@
 <template>
   <v-container>
-    <v-row xs12>
-      <v-col xs12>
-        <v-card
-            :color="item.color"
-            dark>
-            <div class="d-flex flex-no-wrap justify-space-between">
-              <div>
-                <v-card-title
-                  class="headline"
-                  v-text="item.title"
-                ></v-card-title>
-                <v-card-subtitle v-text="item.artist"></v-card-subtitle>
-                <v-card-action>
-                  <v-btn
-                    v-if="item.artist === 'Ellie Goulding'"
-                    class="ml-2 mt-3"
-                    fab
-                    icon
-                    height="40px"
-                    right
-                    width="40px"><v-icon>mdi-play</v-icon>
-                  </v-btn>
-                  <v-btn
-                    v-else
-                    class="ml-2 mt-5"
-                    outlined
-                    rounded
-                    small>
-                    START RADIO</v-btn>
-                </v-card-action>
-              </div>
+    <v-row>
+      <v-col xs="12" sm="6" offset-sm="3">
+        <h4>Create a new Meetup</h4>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col xs="12">
+        <form @submit.prevent="onCreateMeetup">
+          <v-row>
+            <v-col xs12 sm="6" offset-sm="3">
+              <v-text-field
+                name="title"
+                label="title"
+                id="title"
+                v-model="title"
+                required>
 
-              <v-avatar
-                class="ma-3"
-                size="125"
-                tile>
-                <v-img :src="item.src"></v-img>
-              </v-avatar>
-            </div>
-          </v-card>
+              </v-text-field>
+            </v-col>
+            <v-col xs12 sm="6" offset-sm="3">
+              <v-text-field
+                name="location"
+                label="location"
+                id="location"
+                v-model="location"
+                required>
+
+              </v-text-field>
+            </v-col>
+            <v-col xs12 sm="6" offset-sm="3">
+              <v-text-field
+                name="imageUrl"
+                label="Image URL"
+                id="image-url"
+                v-model="imageUrl"
+                required>
+
+              </v-text-field>
+            </v-col>
+            <v-col xs12 sm="6" offset-sm="3">
+              <img height="150" :src="imageUrl">
+            </v-col>
+            <v-col cols="12" xs12 sm="6" offset-sm="3">
+              <v-textarea
+                name="description"
+                label="description"
+                id="description"
+                v-model="description"
+                required>
+                <template v-slot:label>
+                  <div>
+                    Description <small>(description)</small>
+                  </div>
+                </template>
+              </v-textarea>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col xs="12" sm="6" offset-sm="3">
+              <v-btn class="primary"
+                    :disabled="!formIsValid"
+                    type="submit">CREATE MEETUP</v-btn>
+            </v-col>
+          </v-row>
+        </form>
       </v-col>
     </v-row>
   </v-container>
@@ -47,7 +72,38 @@
 
 <script>
 export default {
-
+  computed: {
+    formIsValid () {
+      return this.title !== '' && 
+            this.location !== '' && 
+            this.imageUrl !== '' && 
+            this.description !== ''
+    }
+  },
+  data () {
+    return {
+      title: '',
+      location: '',
+      imageUrl: '',
+      description: ''
+    }
+  },
+  methods: {
+    onCreateMeetup () {
+      if(!this.formIsValid) {
+        return
+      }
+      const meetupData = {
+        title: this.title,
+        location: this.location,
+        imageUrl: this.imageUrl,
+        description: this.description,
+        date: new Date
+      }
+      this.$store.dispatch('createMeetup', meetupData)
+      this.$router.push('/meetups')
+    }
+  }
 }
 </script>
 

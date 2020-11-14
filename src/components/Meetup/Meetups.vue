@@ -24,7 +24,7 @@
                 class="ma-3"
                 size="125"
                 tile>
-                <v-img :src="meetup.src"></v-img>
+                <v-img :src="meetup.imageUrl"></v-img>
               </v-avatar>
             </div>
           </v-card>
