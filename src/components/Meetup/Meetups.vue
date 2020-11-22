@@ -10,7 +10,9 @@
                 <v-card-title
                   class="headline"
                   v-text="meetup.title"
-                ></v-card-title>
+                >
+                  <div>{{meetup.date | DateFormat}}</div>
+                </v-card-title>
                 <v-card-subtitle v-text="meetup.artist"></v-card-subtitle>
                 <v-card-text v-text="meetup.date"></v-card-text>
                 <v-card-actions>

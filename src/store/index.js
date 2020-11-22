@@ -8,7 +8,7 @@ export default new Vuex.Store({
     loadedMeetups:[
       {
         id: 1,
-        date: '2020-11-14',
+        date: new Date(),
         color: '#1F7087',
         imageUrl: 'https://cdn.vuetifyjs.com/images/cards/foster.jpg',
         title: 'Supermodel',
@@ -18,7 +18,7 @@ export default new Vuex.Store({
       },
       {
         id: 2,
-        date: '2020-11-15',
+        date: new Date(),
         color: '#952175',
         imageUrl: 'https://cdn.vuetifyjs.com/images/cards/halcyon.png',
         title: 'Halcyon Days',
