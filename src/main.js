@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify';
-import DateFormat from './Filter/date';
+import DateFormat from './filter/date';
 
 Vue.config.productionTip = false
 // Vue.config.globalProperties.$filters = {
@@ -12,7 +12,7 @@ Vue.config.productionTip = false
 //     return date.toLocaleString(['en-US'], {month: 'short', day: '2-digit', year: 'numeric', hours: '2-digit', minute: '2-digit'})
 //   }
 // }
-Vue.filter('DateFormat', DateFormat)
+Vue.filter('date', DateFormat)
 
 new Vue({
   router,

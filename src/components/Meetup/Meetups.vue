@@ -11,10 +11,10 @@
                   class="headline"
                   v-text="meetup.title"
                 >
-                  <div>{{meetup.date | DateFormat}}</div>
+
                 </v-card-title>
                 <v-card-subtitle v-text="meetup.artist"></v-card-subtitle>
-                <v-card-text v-text="meetup.date"></v-card-text>
+                <v-card-text v-text="$options.filters.date(meetup.date)"></v-card-text>
                 <v-card-actions>
                   <v-btn :to="{name: 'Meetup', params: {id: meetup.id}}" link text>
                     <v-icon left>mdi-account-multiple</v-icon> View Meetup

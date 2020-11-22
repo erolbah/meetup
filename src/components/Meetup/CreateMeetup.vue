@@ -97,7 +97,11 @@ export default {
         date.setMinutes(minutes)
       }
       return date
-    }
+    },
+    // test () {
+    //   const date = this.submitableDate
+    //   return date.toLocaleString(['en-US'], {month: 'short', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'})
+    // }
   },
   data () {
     return {
