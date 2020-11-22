@@ -59,6 +59,15 @@
           </v-row>
           <v-row>
             <v-col xs="12" sm="6" offset-sm="3">
+              <h4>Choose a Date & Time</h4>
+              <v-date-picker v-model="date"></v-date-picker>
+              {{date}}
+              <v-time-picker v-model="time" ampm-in-title></v-time-picker>
+              {{time}}
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col xs="12" sm="6" offset-sm="3">
               <v-btn class="primary"
                     :disabled="!formIsValid"
                     type="submit">CREATE MEETUP</v-btn>
@@ -78,6 +87,16 @@ export default {
             this.location !== '' && 
             this.imageUrl !== '' && 
             this.description !== ''
+    },
+    submitableDate () {
+      const date = new Date(this.date)
+      if (this.time !== '') {
+        const hours = this.time.match(/^(\d+)/)[1]
+        const minutes = this.time.match(/:(\d+)/)[1]
+        date.setHours(hours)
+        date.setMinutes(minutes)
+      }
+      return date
     }
   },
   data () {
@@ -85,7 +104,9 @@ export default {
       title: '',
       location: '',
       imageUrl: '',
-      description: ''
+      description: '',
+      date: new Date().toISOString().substr(0, 10),
+      time: ''
     }
   },
   methods: {
@@ -98,7 +119,7 @@ export default {
         location: this.location,
         imageUrl: this.imageUrl,
         description: this.description,
-        date: new Date
+        date: this.submitableDate
       }
       this.$store.dispatch('createMeetup', meetupData)
       this.$router.push('/meetups')

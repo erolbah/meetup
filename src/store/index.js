@@ -13,6 +13,8 @@ export default new Vuex.Store({
         imageUrl: 'https://cdn.vuetifyjs.com/images/cards/foster.jpg',
         title: 'Supermodel',
         artist: 'Foster the People',
+        location: 'Drachten',
+        description: 'Dit is een dummy tekst om er voor te zorgen dat er een textveld gevuld word zodat er iets zichtbaar is op het scherm.'
       },
       {
         id: 2,
@@ -21,6 +23,8 @@ export default new Vuex.Store({
         imageUrl: 'https://cdn.vuetifyjs.com/images/cards/halcyon.png',
         title: 'Halcyon Days',
         artist: 'Ellie Goulding',
+        location: 'Drachten',
+        description: 'Dit is een dummy tekst om er voor te zorgen dat er een textveld gevuld word zodat er iets zichtbaar is op het scherm.'
       }
     ],
     user: {
