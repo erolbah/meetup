@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col xs="12">
-        <form @submit.prevent="onCreateMeetup">
+        <form @submit.prevent="onSignUp">
           <v-row>
             <v-col xs12 sm="6" offset-sm="3">
               <v-text-field
@@ -66,7 +66,7 @@ export default {
   },
   methods: {
     onSignUp () {
-      console.log(this.email, this.password, this.confirmPassword)
+      this.$store.dispatch('signUserUp', {email: this.email, password: this.password})
     }
   }
 }
