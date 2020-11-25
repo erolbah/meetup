@@ -1,5 +1,10 @@
 <template>
   <v-container>
+    <v-row v-if="error">
+      <v-col xs="12" sm="6" offset-sm="3">
+        <Alert @dismissed="onDismissed" :text="error.message"> </Alert>
+      </v-col>
+    </v-row>
     <v-row>
       <v-col xs="12">
         <form @submit.prevent="onSignUp">
@@ -41,7 +46,15 @@
           <v-row>
             <v-col xs="12" sm="6" offset-sm="3">
               <v-btn class="primary"
-                    type="submit">Sign Up</v-btn>
+                    type="submit"
+                    :disabled="loading"
+                    :loading="loading">Sign Up
+                <template v-slot:loader>
+                  <span class="custom-loader">
+                    <v-icon light>mdi-cached</v-icon>
+                  </span>
+                </template>      
+              </v-btn>
             </v-col>
           </v-row>
         </form>
@@ -51,13 +64,21 @@
 </template>
 
 <script>
+
 export default {
+
   computed: {
     comparePasswords () {
       return this.password !== this.confirmPassword ? 'Passwords do not match' : true
     },
     user () {
       return this.$store.getters.user
+    },
+    error () {
+      return this.$store.getters.error
+    },
+    loading () {
+      return this.$store.getters.loading
     }
   },
   data () {
@@ -77,6 +98,10 @@ export default {
   methods: {
     onSignUp () {
       this.$store.dispatch('signUserUp', {email: this.email, password: this.password})
+    },
+    onDismissed () {
+      console.log('Dismissed Alert')
+      this.$store.dispatch('clearError')
     }
   }
 }

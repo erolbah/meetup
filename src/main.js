@@ -6,16 +6,15 @@ import vuetify from './plugins/vuetify';
 import DateFormat from './filter/date';
 // import * as firebase from 'firebase';
 import firebase from 'firebase'
+import Alert from './components/Shared/Alert.vue'
+import './style/main.scss'
+
 Vue.use(firebase) 
 
 Vue.config.productionTip = false
-// Vue.config.globalProperties.$filters = {
-//   dateFormat (value) {
-//     const date = new Date(value) 
-//     return date.toLocaleString(['en-US'], {month: 'short', day: '2-digit', year: 'numeric', hours: '2-digit', minute: '2-digit'})
-//   }
-// }
 Vue.filter('date', DateFormat)
+
+Vue.component('Alert', Alert)
 
 const firebaseConfig = {
   apiKey: "AIzaSyCvJ0D6aTOldEtODzjsI2L2HB6W8Esbuiw",
