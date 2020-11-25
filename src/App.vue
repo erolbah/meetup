@@ -75,17 +75,28 @@ export default {
   components: {
     
   },
-
-  data () {
-    return {
-      sideNav: false,
-      menuItems: [
-        {link: '/meetups', icon: 'mdi-account-multiple', title: 'View Meetups'},
-        {link: '/meetup/new', icon: 'mdi-map-marker', title: 'Orginaze Meetup'},
-        {link: '/profile', icon: 'mdi-account', title: 'Profile'},
+  computed: {
+    menuItems () {
+      let menuItems = [
         {link: '/signup', icon: 'mdi-face', title: 'Sign Up'},
         {link: '/signin', icon: 'mdi-lock-open', title: 'Sign In'}
       ]
+      if (this.userIsAuthenticated) {
+        menuItems = [
+          {link: '/meetups', icon: 'mdi-account-multiple', title: 'View Meetups'},
+          {link: '/meetup/new', icon: 'mdi-map-marker', title: 'Orginaze Meetup'},
+          {link: '/profile', icon: 'mdi-account', title: 'Profile'}
+        ]
+      }
+      return menuItems
+    },
+    userIsAuthenticated () {
+      return this.$store.getters.user !== null && this.$store.getters.user !== undefined
+    }
+  },
+  data () {
+    return {
+      sideNav: false,
     }
   },
 };

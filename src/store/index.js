@@ -28,10 +28,7 @@ export default new Vuex.Store({
         description: 'Dit is een dummy tekst om er voor te zorgen dat er een textveld gevuld word zodat er iets zichtbaar is op het scherm.'
       }
     ],
-    user: {
-      id: 1,
-      registeredMeetups: [2]
-    }
+    user: null
   },
   getters: {
     loadedMeetups (state) {
@@ -48,6 +45,9 @@ export default new Vuex.Store({
           return meetup.id == meetupId
         })
       }
+    },
+    user (state) {
+      return state.user
     }
   },
   actions: {
@@ -75,6 +75,22 @@ export default new Vuex.Store({
         }
       )
       .catch(
+        error => {
+          console.log(error)
+        }
+      )
+    },
+    signUserIn ({commit}, payload) {
+      firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
+      .then(
+        user => {
+          const newUser = {
+            id: user.uid,
+            registeredMeetups: []
+          }
+          commit('setUser', newUser)
+        }
+      ) .catch (
         error => {
           console.log(error)
         }
