@@ -7,26 +7,26 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     loadedMeetups:[
-      {
-        id: 1,
-        date: new Date(),
-        color: '#1F7087',
-        imageUrl: 'https://cdn.vuetifyjs.com/images/cards/foster.jpg',
-        title: 'Supermodel',
-        artist: 'Foster the People',
-        location: 'Drachten',
-        description: 'Dit is een dummy tekst om er voor te zorgen dat er een textveld gevuld word zodat er iets zichtbaar is op het scherm.'
-      },
-      {
-        id: 2,
-        date: new Date(),
-        color: '#952175',
-        imageUrl: 'https://cdn.vuetifyjs.com/images/cards/halcyon.png',
-        title: 'Halcyon Days',
-        artist: 'Ellie Goulding',
-        location: 'Drachten',
-        description: 'Dit is een dummy tekst om er voor te zorgen dat er een textveld gevuld word zodat er iets zichtbaar is op het scherm.'
-      }
+      // {
+      //   id: 1,
+      //   date: new Date(),
+      //   color: '#1F7087',
+      //   imageUrl: 'https://cdn.vuetifyjs.com/images/cards/foster.jpg',
+      //   title: 'Supermodel',
+      //   artist: 'Foster the People',
+      //   location: 'Drachten',
+      //   description: 'Dit is een dummy tekst om er voor te zorgen dat er een textveld gevuld word zodat er iets zichtbaar is op het scherm.'
+      // },
+      // {
+      //   id: 2,
+      //   date: new Date(),
+      //   color: '#952175',
+      //   imageUrl: 'https://cdn.vuetifyjs.com/images/cards/halcyon.png',
+      //   title: 'Halcyon Days',
+      //   artist: 'Ellie Goulding',
+      //   location: 'Drachten',
+      //   description: 'Dit is een dummy tekst om er voor te zorgen dat er een textveld gevuld word zodat er iets zichtbaar is op het scherm.'
+      // }
     ],
     user: null,
     loading: false,
@@ -59,17 +59,48 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    loadMeetups({commit}){
+      commit('setLoading', true)
+      firebase.database().ref('meetups').once('value')
+        .then((data) => {
+          const meetups = []
+          const obj = data.val()
+          for (let key in obj) {
+            meetups.push({
+              id: key,
+              title: obj[key].title,
+              description: obj[key].description,
+              imageUrl: obj[key].imageUrl,
+              date: obj[key].date
+            })
+          }
+          commit('setLoadedMeetups', meetups)
+          commit('setLoading', false)
+        })
+        .catch((error) => {
+          console.log(error)
+          commit('setLoading', false)
+        })
+    },
     createMeetup ({commit}, payload) {
       const meetup = {
         title: payload.title,
         location: payload.location,
         imageUrl: payload.imageUrl,
         description: payload.description,
-        date: payload.date,
-        id: 'asdsadasd'
+        date: payload.date.toISOString()
       }
+      firebase.database().ref('meetups').push(meetup)
+      .then((data) => {
+        const key = data.key
+        commit('createMeetup', {
+          ...meetup, id: key
+        })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
       // reachout to firebase and store it
-      commit('createMeetup', meetup)
     },
     signUserUp ({commit}, payload) {
       commit('setLoading', true)
@@ -119,6 +150,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    setLoadedMeetups (state, payload) {
+      state.loadedMeetups = payload
+    },
     createMeetup (state, payload) {
       state.loadedMeetups.push(payload)
     },

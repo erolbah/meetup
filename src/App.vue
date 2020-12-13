@@ -99,5 +99,8 @@ export default {
       sideNav: false,
     }
   },
+  created () {
+    this.$store.dispatch('loadMeetups')
+  }
 };
 </script>

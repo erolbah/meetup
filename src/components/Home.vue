@@ -9,7 +9,20 @@
       </v-col>
     </v-row>
     <v-row>
+      <v-col xs12>
+        <div class="text-center">
+          <v-progress-circular
+            indeterminate
+            color="primary"
+          :width="7"
+          :size="70"
+          v-if="loading"></v-progress-circular>
+        </div>
+      </v-col>
+    </v-row>
+    <v-row>
       <v-carousel
+      v-if="!loading"
         cycle
         height="400"
         hide-delimiter-background
@@ -42,6 +55,9 @@ export default {
   computed: {
     slides () {
       return this.$store.getters.featuredMeetups
+    },
+    loading () {
+      return this.$store.getters.loading
     }
   },
   data () {
