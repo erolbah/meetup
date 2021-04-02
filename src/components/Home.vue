@@ -5,7 +5,7 @@
         <v-btn class="primary" large center to="/meetups">Explore Meetups</v-btn>
       </v-col>
       <v-col align="center" xs12 sm6 class="text-sm-left text-xs-center">
-        <v-btn class="primary" large to="/meetups/new">Orginaze Meetup</v-btn>
+        <v-btn class="primary" large to="/meetup/new">Orginaze Meetup</v-btn>
       </v-col>
     </v-row>
     <v-row>

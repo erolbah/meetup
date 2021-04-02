@@ -41,6 +41,16 @@
               <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+        <!-- Logout button -->
+        <v-list-item @click="onLogout" v-if="userIsAuthenticated" link>
+            <v-list-item-icon>
+              <v-icon>mdi-exit-to-app</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>Logout</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </v-list>
       </v-navigation-drawer>
     </v-card>
@@ -59,6 +69,11 @@
             <v-icon left>{{item.icon}}</v-icon> {{item.title}}
           </v-btn>
         </v-toolbar-items>
+        <v-toolbar-items @click="onLogout" v-if="userIsAuthenticated" class="hidden-xs-only">
+          <v-btn link text>
+            <v-icon left>mdi-exit-to-app</v-icon>Logout
+          </v-btn>
+        </v-toolbar-items>
       </v-toolbar>
     </v-card>
     <main>
@@ -68,6 +83,7 @@
 </template>
 
 <script>
+import firebase from 'firebase'
 
 export default {
   name: 'App',
@@ -99,7 +115,17 @@ export default {
       sideNav: false,
     }
   },
+  methods: {
+    onLogout() {
+      this.$store.dispatch('logout')
+    }
+  },
   created () {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.$store.dispatch('autoSignIn', user)
+      }
+    })
     this.$store.dispatch('loadMeetups')
   }
 };
