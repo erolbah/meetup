@@ -30,14 +30,21 @@
               </v-text-field>
             </v-col>
             <v-col xs12 sm="6" offset-sm="3">
-              <v-text-field
+              <!-- <v-text-field
                 name="imageUrl"
                 label="Image URL"
                 id="image-url"
                 v-model="imageUrl"
                 required>
 
-              </v-text-field>
+              </v-text-field> -->
+              <v-file-input
+                v-model="image"
+                accept="image/*"
+                label="File input"
+                truncate-length="15"
+                @change="onFilePicked()"
+              ></v-file-input>
             </v-col>
             <v-col xs12 sm="6" offset-sm="3">
               <img height="150" :src="imageUrl">
@@ -110,7 +117,8 @@ export default {
       imageUrl: '',
       description: '',
       date: new Date().toISOString().substr(0, 10),
-      time: ''
+      time: '',
+      image: null
     }
   },
   methods: {
@@ -118,15 +126,32 @@ export default {
       if(!this.formIsValid) {
         return
       }
+      if(!this.imageUrl) {
+        return
+      }
       const meetupData = {
         title: this.title,
         location: this.location,
-        imageUrl: this.imageUrl,
+        image: this.image,
         description: this.description,
         date: this.submitableDate
       }
       this.$store.dispatch('createMeetup', meetupData)
       this.$router.push('/meetups')
+    },
+    onFilePicked () {
+      console.log(this.image)
+      console.log(this.image.name)
+      // const files = target.files
+      let filename = this.image.name
+      if (filename.lastIndexOf('.') <= 0) {
+        return alert('Please add a valid file')
+      }
+      const fileReader = new FileReader()
+      fileReader.addEventListener('load', () => {
+        this.imageUrl = fileReader.result
+      })
+      fileReader.readAsDataURL(this.image)
     }
   }
 }

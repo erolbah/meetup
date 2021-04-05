@@ -83,27 +83,40 @@ export default new Vuex.Store({
           commit('setLoading', false)
         })
     },
-    createMeetup ({commit, getters}, payload) {
-      const meetup = {
-        title: payload.title,
-        location: payload.location,
-        imageUrl: payload.imageUrl,
-        description: payload.description,
-        date: payload.date.toISOString(),
-        creatorId: getters.user.id
-      }
-      firebase.database().ref('meetups').push(meetup)
-      .then((data) => {
-        const key = data.key
-        commit('createMeetup', {
-          ...meetup, id: key
+    createMeetup({commit, getters}, payload) {
+      // image is passed as file, need to upload it and then store the imageUrl
+      const dbRef = firebase.database().ref("meetups").push();
+      const key = dbRef.key;
+      const filename = payload.image.name;
+      const ext = filename.slice(filename.lastIndexOf("."));
+      const storageRef = firebase.storage().ref("meetups").child(key + "." + ext);
+ 
+      storageRef.put(payload.image)
+        .then(() => {
+          // file uploaded
+          return storageRef.getDownloadURL();
         })
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-      // reachout to firebase and store it
+        .then((downloadUrl) => {
+          const meetup = {
+            title: payload.title,
+            location: payload.location,
+            description: payload.description,
+            date: payload.date.toISOString(),
+            id: key,
+            creatorId: getters.user.id,
+            imageUrl: downloadUrl,
+          };
+          commit("createMeetup", meetup);
+          return dbRef.set(meetup);
+        })
+        .then(() => {
+          console.log("meeting created");
+        })
+        .catch((error) => {
+          console.error("error: " + error);
+        });
     },
+
     signUserUp ({commit}, payload) {
       commit('setLoading', true)
       commit('clearError')
