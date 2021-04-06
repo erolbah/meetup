@@ -7,6 +7,7 @@ import DateFormat from './filter/date';
 // import * as firebase from 'firebase';
 import firebase from 'firebase'
 import Alert from './components/Shared/Alert.vue'
+import AppEditMeetupDetailsDialog from './components/Meetup/Edit/EditMeetupDetailsDialog.vue'
 import './style/main.scss'
 
 Vue.use(firebase) 
@@ -15,6 +16,7 @@ Vue.config.productionTip = false
 Vue.filter('date', DateFormat)
 
 Vue.component('Alert', Alert)
+Vue.component('app-edit-meetup-details-dialog', AppEditMeetupDetailsDialog)
 
 const firebaseConfig = {
   apiKey: "AIzaSyCvJ0D6aTOldEtODzjsI2L2HB6W8Esbuiw",
